@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <title>Sparks</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
     <div class="mainSection">
