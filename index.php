@@ -8,7 +8,7 @@
     <div class="wrapper indexPage">
         <div class="mainSection">
             <div class="logoContainer">
-                <img src="https://pbs.twimg.com/media/Eht3FIKUYAIymZP?format=png&name=240x240">
+                <img src="assets/images/sparksLogo.png">
                 <div class="searchContainer">
                     <form action="search.php" method="GET">
                         <input class="searchBox" type="text" name="term">
