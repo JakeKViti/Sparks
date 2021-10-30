@@ -8,11 +8,11 @@
     <div class="wrapper">
         <div class="header">
             <div class="headerContent">
-                <div class="logoContainer">
-                    <a herf="index.php">
-                        <img src="assets/images/sparksLogo.png" >
-                    </a>
-                </div>
+            <div class="logoContainer">
+					<a href="index.php">
+						<img src="assets/images/sparksLogo.png">
+					</a>
+				</div>
             <div class="searchContainer">
                 <form action="search.php" method="GET">
                     <div class="searchBarContainer">
