@@ -1,3 +1,10 @@
+<?php
+    if(isset($_GET["term"])){
+        $term = $_GET["term"];
+    } else {
+        exit("You must enter a search term");
+    }    
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +30,17 @@
                     </div>
                 </form>
             </div>
+            </div>
+
+            <div class="tabsContainer">
+                <ul class="tabList">
+                    <li>
+                    <a href='<?php echo "search.php?term=$term&type=sites"; ?>'>Sites</a>
+                    </li>
+                    <li>
+                    <a href='<?php echo "search.php?term=$term&type=images"; ?>'>Images</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
