@@ -57,7 +57,7 @@ function getDetails($url) {
     $description = str_replace("\n", "", $description);
     $keywords = str_replace("\n", "", $keywords);
     
-	echo "URL: $url, Title: $title<br>";
+	echo "URL: $url, description: $description, keywords: $keywords<br>";
 
 }
 
