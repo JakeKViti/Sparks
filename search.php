@@ -5,7 +5,7 @@
         exit("You must enter a search term");
     }    
 
-    $type = isset($_GET["type"]) ? $_GET["term"] : "sites";
+    $type = isset($_GET["type"]) ? $_GET["type"] : "sites";
 ?>
 <!DOCTYPE html>
 <html lang="en">
