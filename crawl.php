@@ -20,6 +20,20 @@ function insertLink($url, $title, $description, $keywords){
     return $query->execute();
 }
 
+function insertImage($url, $src, $alt, $title) {
+	global $con;
+
+	$query = $con->prepare("INSERT INTO images(siteUrl, imageUrl, alt, title)
+							VALUES(:siteUrl, :imageUrl, :alt, :title)");
+
+	$query->bindParam(":siteUrl", $url);
+	$query->bindParam(":imageUrl", $src);
+	$query->bindParam(":alt", $alt);
+	$query->bindParam(":title", $title);
+
+	return $query->execute();
+}
+
 function linkExists($url){
     global $con;
 
@@ -109,7 +123,7 @@ function getDetails($url) {
         if(!in_array($src, $alreadyFoundImages)){
             $alreadyFoundImages[] = $src;
 
-            //insert images
+            insertImage($url, $src, $alt, $title);
         }
     }
 }
@@ -137,7 +151,7 @@ function followLinks($url){
             getDetails($href);
             //insert href;
         } 
-        else return;
+        #else return;
         #echo $href . "<br>";
     }
 
