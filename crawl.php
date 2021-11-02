@@ -4,6 +4,7 @@ include("classes/DomDocumentParser.php");
 
 $alreadyCrawled = array();
 $crawling = array();
+$alreadyFoundImages = array();
 
 function insertLink($url, $title, $description, $keywords){
     global $con;
@@ -50,6 +51,8 @@ function createLink($src, $url){
 
 function getDetails($url) {
 
+    global $alreadyFoundImages;
+
 	$parser = new DomDocumentParser($url);
 
 	$titleArray = $parser->getTitletags();
@@ -91,6 +94,24 @@ function getDetails($url) {
         echo "Error: $url failed to insert <br>";
     }
 
+    $imageArray = $parser->getImgtags();
+    foreach($imageArray as $image){
+        $src = $image->getAttribute("src");
+        $alt = $image->getAttribute("alt");
+        $title = $image->getAttribute("title");
+
+        if(!$title && !$alt){
+            continue;
+        }
+
+        $src = createLink($src, $url);
+
+        if(!in_array($src, $alreadyFoundImages)){
+            $alreadyFoundImages[] = $src;
+
+            //insert images
+        }
+    }
 }
 
 function followLinks($url){
