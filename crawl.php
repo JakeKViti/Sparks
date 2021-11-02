@@ -108,7 +108,7 @@ function getDetails($url) {
         echo "Error: $url failed to insert <br>";
     }
 
-    $imageArray = $parser->getImgtags();
+    $imageArray = $parser->getImages();
     foreach($imageArray as $image){
         $src = $image->getAttribute("src");
         $alt = $image->getAttribute("alt");
@@ -161,6 +161,6 @@ function followLinks($url){
     }
 }
 
-$startUrl = "https://www.reddit.com/";
+$startUrl = "http://www.nfl.com";
 followLinks($startUrl);
 ?>
