@@ -53,6 +53,8 @@ include("classes/siteResultsProvider.php");
 
             $numResults = $resultsProvider->getNumResults($term);
             echo "<p class='resultsCount'>$numResults results found</p>";
+
+            echo $resultsProvider->getResultsHTML(1, 20, $term);
             ?>
         </div>
     </div>
