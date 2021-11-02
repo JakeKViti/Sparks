@@ -19,6 +19,17 @@ function insertLink($url, $title, $description, $keywords){
     return $query->execute();
 }
 
+function linkExists($url){
+    global $con;
+
+    $query = $con->prepare("SELECT * FROM sites WHERE url = :url");
+
+    $query->bindParam(":url", $url);
+    $query->execute();
+
+    return $query->rowCount() != 0;
+}
+
 function createLink($src, $url){
     $scheme = parse_url($url)["scheme"];
     $host = parse_url($url)["host"];
@@ -72,7 +83,13 @@ function getDetails($url) {
     $description = str_replace("\n", "", $description);
     $keywords = str_replace("\n", "", $keywords);
     
-    insertLink($url, $title, $description, $keywords);
+    if(linkExists($url)){
+        echo "$url already exists <br>";
+    } else if(insertLink($url, $title, $description, $keywords)){
+        echo "Success: $url <br>";
+    } else {
+        echo "Error: $url failed to insert <br>";
+    }
 
 }
 
