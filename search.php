@@ -51,7 +51,8 @@ include("classes/siteResultsProvider.php");
             <?php 
             $resultsProvider = new siteResultsProvider($con);
 
-            echo $resultsProvider->getNumResults($term);
+            $numResults = $resultsProvider->getNumResults($term);
+            echo "<p class='resultsCount'>$numResults results found</p>";
             ?>
         </div>
     </div>
