@@ -74,8 +74,11 @@ include("classes/siteResultsProvider.php");
                     if($currentPage < 1){
                         $currentPage = 1;
                     }
+                    if($currentPage + $pagesLeft > $numPages + 1){
+                        $currentPage = $numPages + 1 - $pagesLeft;
+                    }
                     
-                    while($pagesLeft!=0){
+                    while($pagesLeft != 0 && $currentPage <= $numPages){
                         if($currentPage==$page)
                         {
                             echo "<div class='pageNumberContainer'>
