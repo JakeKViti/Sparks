@@ -65,8 +65,16 @@ include("classes/siteResultsProvider.php");
                     <img src="assets/images/pageStart.png">
                 </div>
                 <?php 
-                    $currentPage = 1;
-                    $pagesLeft = 10;
+                    $pagesToShow = 10;
+                    $numPages = ceil($numResults/$pageLimit);
+                    $pagesLeft = min($pagesToShow, $numPages);
+                    
+                    $currentPage = $page - floor($pagesToShow / 2);
+
+                    if($currentPage < 1){
+                        $currentPage = 1;
+                    }
+                    
                     while($pagesLeft!=0){
                         if($currentPage==$page)
                         {
