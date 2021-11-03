@@ -8,6 +8,7 @@ include("classes/siteResultsProvider.php");
     }    
 
     $type = isset($_GET["type"]) ? $_GET["type"] : "sites";
+    $page = isset($_GET["page"]) ? $_GET["page"] : 1;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,11 +51,12 @@ include("classes/siteResultsProvider.php");
         <div class="mainResultsSection">
             <?php 
             $resultsProvider = new siteResultsProvider($con);
+            $pageLimit = 20;
 
             $numResults = $resultsProvider->getNumResults($term);
             echo "<p class='resultsCount'>$numResults results found</p>";
 
-            echo $resultsProvider->getResultsHTML(1, 20, $term);
+            echo $resultsProvider->getResultsHTML($page, $pageLimit, $term);
             ?>
         </div>
     </div>
