@@ -28,8 +28,8 @@ class ImageResultsProvider{
 
         $query = $this->con->prepare("SELECT *
                                       FROM images 
-                                      WHERE title LIKE :term
-                                      OR alt like :term
+                                      WHERE (title LIKE :term 
+									  OR alt LIKE :term)
                                       AND broken=0
                                       ORDER BY clicks DESC
                                       LIMIT :fromLimit, :pageSize");
@@ -59,18 +59,19 @@ class ImageResultsProvider{
             }
 
             $resultsHtml .= "<div class='gridItem image$count'>
-                                <a href='$imageUrl' data-fancybox>
-                                <script>
-                                $(document).ready(function(){
-                                  loadImage(\"$imageUrl\", \"image$count\")  
-                                })
-                                </script>
-                                    <img src='$imageUrl'>
-                                    <span class='details'>$displayText</span>
-                                </a>
-                            </div>";
+                <a href='$imageUrl' data-fancybox data-caption='$displayText'
+                data-siteurl='$siteUrl'>
+                    <script>
+                        $(document).ready(function() {
+                            loadImage(\"$imageUrl\", \"image$count\");
+                        });
+                    </script>
+                <span class='details'>$displayText</span>
+                </a>
+            </div>";
         }
         $resultsHtml .= "</div>";
+        
         return $resultsHtml;
     }
 

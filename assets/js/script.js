@@ -24,7 +24,9 @@ $(document).ready(function(){
 		isInitLayout: false
 	});
 
-    $("[data-fancybox]").fancybox();
+    $("[data-fancybox]").fancybox({
+        
+    });
 })
 
 function increaseLinkClicks(linkID, url){
@@ -33,9 +35,12 @@ function increaseLinkClicks(linkID, url){
 
 function loadImage(src, className){
     var image = $("<img>");
+
 	image.on("load", function() {
 		$("." + className + " a").append(image);
+
 		clearTimeout(timer);
+
 		timer = setTimeout(function() {
 			$(".imageResults").masonry();
 		}, 500);
