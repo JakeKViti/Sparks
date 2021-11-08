@@ -1,3 +1,5 @@
+var timer
+
 $(document).ready(function(){
     $(".result").on("click", function(){
         let url = $(this).attr("href");
@@ -11,6 +13,10 @@ $(document).ready(function(){
     })
     var grid = $(".imageResults");
 
+	grid.on("layoutComplete", function() {
+		$(".gridItem img").css("visibility", "visible");
+	});
+
 	grid.masonry({
 		itemSelector: ".gridItem",
 		columnWidth: 200,
@@ -23,11 +29,16 @@ function increaseLinkClicks(linkID, url){
     $.post("ajax/updateLinkCount.php", {linkID: linkID});
 }
 
-function loadImage(src){
+function loadImage(src, className){
     var image = $("<img>");
-    image.on("load", function(){
-        $("." + className + " a").append(image);
-    })
+	image.on("load", function() {
+		$("." + className + " a").append(image);
+		clearTimeout(timer);
+		timer = setTimeout(function() {
+			$(".imageResults").masonry();
+		}, 500);
+
+	});
 
     image.on("error", function(){
         
