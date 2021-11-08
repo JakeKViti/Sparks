@@ -9,6 +9,14 @@ $(document).ready(function(){
         increaseLinkClicks(linkID, url);
         return false
     })
+    var grid = $(".imageResults");
+
+	grid.masonry({
+		itemSelector: ".gridItem",
+		columnWidth: 200,
+		gutter: 5,
+		isInitLayout: false
+	});
 })
 
 function increaseLinkClicks(linkID, url){
