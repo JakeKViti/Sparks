@@ -22,3 +22,16 @@ $(document).ready(function(){
 function increaseLinkClicks(linkID, url){
     $.post("ajax/updateLinkCount.php", {linkID: linkID});
 }
+
+function loadImage(src){
+    var image = $("<img>");
+    image.on("load", function(){
+        $("." + className + " a").append(image);
+    })
+
+    image.on("error", function(){
+        
+    })
+
+    image.attr("src", src)
+}
