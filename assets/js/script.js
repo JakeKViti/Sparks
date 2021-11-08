@@ -23,6 +23,8 @@ $(document).ready(function(){
 		gutter: 5,
 		isInitLayout: false
 	});
+
+    $("[data-fancybox]").fancybox();
 })
 
 function increaseLinkClicks(linkID, url){
