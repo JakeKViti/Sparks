@@ -27,10 +27,10 @@ class ImageResultsProvider{
         $fromLimit = ($page - 1) * $pageSize;
 
         $query = $this->con->prepare("SELECT *
-                                      FROM sites WHERE title LIKE :term
-                                      OR url LIKE :term
-                                      OR keywords LIKE :term
-                                      OR description LIKE :term
+                                      FROM images 
+                                      WHERE title LIKE :term
+                                      OR alt like :term
+                                      AND broken=0
                                       ORDER BY clicks DESC
                                       LIMIT :fromLimit, :pageSize");
                                       
@@ -40,24 +40,26 @@ class ImageResultsProvider{
         $query->bindParam(":pageSize", $pageSize, PDO::PARAM_INT);
         $query->execute();
 
-        $resultsHtml = "<div class='siteResults'>";
+        $resultsHtml = "<div class='imageResults'>";
         while($row = $query->fetch(PDO::FETCH_ASSOC)){
             $id = $row["id"];
-            $url = $row["url"];
+            $imageUrl = $row["imageUrl"];
             $title = $row["title"];
-            $description = $row["description"];
+            $siteUrl = $row["siteUrl"];
+            $alt = $row["alt"];
 
-            $title = $this->trimField($title, 55);
-            $description = $this->trimField($description, 230);
+            if($title){
+                $displayText = $title;
+            } else if ($alt){
+                $displayText = $alt;
+            } else {
+                $displayText = $imageUrl;
+            }
 
-            $resultsHtml .= "<div class='resultContainer'>
-                                <h3 class='title'>
-                                    <a class='result' href ='$url' data-linkID='$id'>
-                                        $title
-                                    </a>
-                                </h3>
-                                <span class='url'>$url</span>
-                                <span class='description'>$description</span>
+            $resultsHtml .= "<div class='gridItem'>
+                                <a href='$imageUrl'>
+                                    <img src='$imageUrl'>
+                                </a>
                             </div>";
         }
         $resultsHtml .= "</div>";
